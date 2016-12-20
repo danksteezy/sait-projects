@@ -1,0 +1,84 @@
+/*! responsive-nav.js 1.0.39 by @viljamis */
+/*Navigation basic function*/
+
+.nav-collapse ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: block;
+  list-style: none;
+}
+
+.nav-collapse li {
+  width: 100%;
+  display: block;
+}
+
+.js .nav-collapse {
+  clip: rect(0 0 0 0);
+  max-height: 0;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  zoom: 1;
+}
+
+.nav-collapse.opened {
+  max-height: 9999px;
+}
+
+.nav-toggle {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+@media screen and (min-width: 41em) {
+  .js .nav-collapse {
+    position: relative;
+  }
+  .js .nav-collapse.closed {
+    max-height: none;
+  }
+  .nav-toggle {
+    display: none;
+  }
+}
+
+/*Navigation styling*/
+.nav-collapse ul {
+  text-align: center;
+  overflow: hidden;
+  background-color: black;
+
+}
+.nav-collapse li {
+  padding: 10px;
+ }
+
+.nav-collapse li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 1em;
+  padding: 5px;
+}
+
+.nav-collapse li a:hover {
+  color: black;
+  font-size: 1.1em;
+  background-color: white;
+}
+
+
+
+@media only screen and (min-width: 41em) {
+  .nav-collapse li {
+  width: 20%;
+  float: left;
+  }
+}
