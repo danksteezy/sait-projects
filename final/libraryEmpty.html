@@ -1,0 +1,133 @@
+<html>
+
+<head>
+    <script type = "text/javascript">
+        //declare global variables for javascript
+        var author;
+        var title;
+        var returnDate;
+        var bookType;
+        var output;
+
+        //function to initialize the output textare, should be empty at start
+        function init() {
+            document.getElementById("output").value = "";
+        }
+
+        //function to validate when form is submmited
+        function validate() {
+            //declare regex for date validation
+            var dateRegex = /\d\d-\d\d-\d\d\d\d/;
+
+            //radio values are set, use instead of loop because only 3 choices
+            var x = document.getElementById('btnFiction').checked;
+            var y = document.getElementById('btnNonFiction').checked;
+            var z = document.getElementById('btnPeriodical').checked;
+
+            //if else used to sequencely check for valid Title, Author, Return-Date, Book-Type
+            //when if statement is true, means invalid entry.
+            //alert is used to identify the problem input field and it is focused
+            if(document.getElementById('txtTitle').value==""){
+              alert('Please enter a Title');
+              document.getElementById('txtTitle').focus();
+            } else if(document.getElementById('txtTitle').length > 70){
+              alert('Title length is too long');
+              document.getElementById('txtTitle').focus();
+            } else if(document.getElementById('txtAuthor').value==""){
+              alert('Please enter Author');
+              document.getElementById('txtAuthor').focus();
+            } else if(document.getElementById('txtDate').value==""){
+              alert('Please enter a Return Date');
+              document.getElementById('txtDate').focus();
+            } else if (!dateRegex.test(document.getElementById('txtDate').value)) {
+              alert('Please enter a valid Date in the form of dd-mm-yyyy');
+              document.getElementById('txtDate').focus();
+            } else if ((x == false) && (y== false) && (z == false)) {
+              alert('Please check a book type');
+
+              //else condition requires that the form is properly filled and submitted
+            } else {
+              //set global variables with input data
+              title = document.getElementById('txtTitle').value;
+              author = document.getElementById('txtAuthor').value;
+              returnDate = document.getElementById('txtDate').value;
+              //using if statment to determine booktype, only 3 choices loop not needed
+              if (x == true) {
+                bookType = "Fiction";
+              }
+              if (y == true) {
+                bookType =  "Non-Fiction";
+              }
+              if (z == true) {
+                bookType =  "Periodical";
+              }
+              //put values into a placeholder string output to prepare for output
+              output= "Title: " + title + "  Author: " + author + "  Return-Date: " + returnDate + "  Book-Type: " + bookType;
+
+              //output is generated into the textarea
+              //+= used to add a new line with each submission
+              document.getElementById('output').value += output + "\n";
+
+              //all values are reset for next submission
+              resetValues();
+            }
+        }
+
+        //function to reset form
+        function resetValues(){
+          document.getElementById('txtTitle').value ="";
+          document.getElementById('txtAuthor').value ="";
+          document.getElementById('txtDate').value ="";
+          document.getElementById('btnFiction').checked = false;
+          document.getElementById('btnNonFiction').checked = false;
+          document.getElementById('btnPeriodical').checked = false;
+        }
+    </script>
+</head>
+
+<!-- initialize texarea -->
+<body onload="init()">
+    <h3>Library Check Out Proof Of Concept</h3>
+    <form name="libraryForm" >
+        <table>
+            <tr>
+                <td>Title:</td>
+                <td>
+                    <input name="txtTitle" id="txtTitle" name="txtTitle" />
+                </td>
+            </tr>
+            <tr>
+                <td>Author:</td>
+                <td>
+                    <input name="txtAuthor" id="txtAuthor" name="txtAuthor" />
+                </td>
+            </tr>
+            <tr>
+                <td>Return Date:</td>
+                <td>
+                    <input name="txtDate" id="txtDate" name="txtDate" />
+                </td>
+            </tr>
+            <tr>
+                <td>Book Type</td>
+                <td>
+                    <input type="radio" name="btnArray1" id="btnFiction" value="Fiction" />
+                    <label for="btnFiction">Fiction</label>
+                    <input type="radio" name="btnArray1" id="btnNonFiction" value="Non-Fiction" />
+                    <label for="btnNonFiction">Non-Fiction</label>
+                    <input type="radio" name="btnArray1" id="btnPeriodical" value="Periodical" />
+                    <label for="btnPeriodical">Periodical</label>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+    </form>
+    <!-- onclick to submit form for validation check -->
+    <button name="submit" onclick="validate()">Check Out</button>
+    <br/>
+    <br/>
+    <textarea name="txtOutput" id="output" rows="10" columns="200"></textarea>
+</body>
+
+</html>
